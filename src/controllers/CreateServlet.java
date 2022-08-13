@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -53,8 +52,8 @@ public class CreateServlet extends HttpServlet {
             t.setUpdated_at(currentTime);
 
             // バリデーションを実行してエラーがあったら新規登録のフォームに戻る
-            List<String> errors = TaskValidator.validate(t);
-            if(errors.size() > 0) {
+            String errors = TaskValidator.validate(t);
+            if(errors != "") {
                 em.close();
 
                 // フォームに初期値を設定、さらにエラーメッセージを送る
